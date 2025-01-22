@@ -1,0 +1,24 @@
+<project name="ReactionRace" default="run" basedir=".">
+  <property name="src.dir" value="src" />
+  <property name="build.dir" value="build" />
+
+  <target name="init">
+    <mkdir dir="${build.dir}" />
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src.dir}" destdir="${build.dir}" />
+  </target>
+
+  <target name="run" depends="compile">
+    <java classname="com.example.reactionrace.Main" fork="true">
+      <classpath>
+        <path location="${build.dir}" />
+      </classpath>
+    </java>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build.dir}" />
+  </target>
+</project>
