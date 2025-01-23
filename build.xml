@@ -1,19 +1,29 @@
 <project name="ReactionRace" default="run" basedir=".">
   <property name="src.dir" value="src" />
   <property name="build.dir" value="build" />
+  <property name="lib.dir" value="lib" />
 
   <target name="init">
     <mkdir dir="${build.dir}" />
   </target>
 
   <target name="compile" depends="init">
-    <javac srcdir="${src.dir}" destdir="${build.dir}" />
+    <javac srcdir="${src.dir}" destdir="${build.dir}">
+      <classpath>
+        <fileset dir="${lib.dir}">
+          <include name="*.jar" />
+        </fileset>
+      </classpath>
+    </javac>
   </target>
 
   <target name="run" depends="compile">
     <java classname="com.example.reactionrace.Main" fork="true">
       <classpath>
         <path location="${build.dir}" />
+        <fileset dir="${lib.dir}">
+          <include name="*.jar" />
+        </fileset>
       </classpath>
     </java>
   </target>

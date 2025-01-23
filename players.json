@@ -1,0 +1,32 @@
+[
+  {
+    "id": "player-1",
+    "name": "Darby",
+    "email": "carter.schroeder@hotmail.com",
+    "password": "h5zxpk2wug4mjev"
+  },
+  {
+    "id": "player-2",
+    "name": "Fritz",
+    "email": "lauren.gleichner@gmail.com",
+    "password": "bmkrjmmx6"
+  },
+  {
+    "id": "player-3",
+    "name": "Katrice",
+    "email": "carly.lebsack@yahoo.com",
+    "password": "xzwxzg9ks8v61y"
+  },
+  {
+    "id": "player-4",
+    "name": "Flor",
+    "email": "corinna.kozey@gmail.com",
+    "password": "yrp96voovqlp"
+  },
+  {
+    "id": "player-5",
+    "name": "Elvie",
+    "email": "travis.kreiger@yahoo.com",
+    "password": "uytrxmye"
+  }
+]

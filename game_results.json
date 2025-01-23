@@ -1,0 +1,27 @@
+[
+  {
+    "playerId": "player-1",
+    "reactionTime": 0.7089752746269675,
+    "success": false
+  },
+  {
+    "playerId": "player-2",
+    "reactionTime": 1.113230818961846,
+    "success": false
+  },
+  {
+    "playerId": "player-3",
+    "reactionTime": 1.295400882243109,
+    "success": true
+  },
+  {
+    "playerId": "player-4",
+    "reactionTime": 2.425875856453471,
+    "success": true
+  },
+  {
+    "playerId": "player-5",
+    "reactionTime": 1.1171154964711776,
+    "success": false
+  }
+]
