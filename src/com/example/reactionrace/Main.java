@@ -1,33 +1,52 @@
 package com.example.reactionrace;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Main {
   public static void main(String[] args) {
+    // Очищення файлів перед запуском
+    clearFile("players.json");
+    clearFile("game_results.json");
+
+    // Ініціалізація репозиторіїв
     PlayerRepository playerRepository = new PlayerRepository("players.json");
+    GameResultRepository gameResultRepository = new GameResultRepository("game_results.json");
 
-    // Створення нових гравців
-    Player player1 = new Player("1", "Alice", "alice@example.com", "password123");
-    Player player2 = new Player("2", "Bob", "bob@example.com", "password456");
+    // Ініціалізація сервісів
+    PlayerService playerService = new PlayerService(playerRepository);
+    GameResultService gameResultService = new GameResultService(gameResultRepository);
+    AuthService authService = new AuthService(playerService);
 
-    playerRepository.create(player1);
-    playerRepository.create(player2);
+    // Реєстрація гравців
+    authService.register("1", "Alice", "alice@example.com", "password123");
+    authService.register("2", "Bob", "bob@example.com", "password456");
 
-    // Читання всіх гравців
-    System.out.println("Усі гравці:");
-    playerRepository.readAll().forEach(System.out::println);
+    // Вхід у систему
+    authService.login("alice@example.com", "password123")
+        .ifPresentOrElse(
+            player -> System.out.println("Вхід успішний для гравця: " + player.getName()),
+            () -> System.out.println("Помилка входу.")
+        );
 
-    // Пошук гравця за ID
-    System.out.println("Гравець з ID 1:");
-    playerRepository.readById("1").ifPresent(System.out::println);
+    // Додавання результатів гри
+    gameResultService.saveGameResult(new GameResult("1", 1.23, true));
+    gameResultService.saveGameResult(new GameResult("2", 1.56, false));
 
-    // Оновлення даних гравця
-    Player updatedPlayer = new Player("1", "Alice Updated", "alice.updated@example.com", "newpassword123");
-    playerRepository.update("1", updatedPlayer);
+    // Виведення всіх результатів гри
+    System.out.println("Усі результати гри:");
+    gameResultService.getAllResults().forEach(System.out::println);
 
-    // Видалення гравця
-    playerRepository.delete("2");
+    // Фільтрація результатів гри
+    System.out.println("Результати гри з часом <= 1.5 секунди:");
+    gameResultService.filterResultsByReactionTime(1.5).forEach(System.out::println);
+  }
 
-    // Фільтрація за іменем
-    System.out.println("Гравці з ім'ям, що містить 'Alice':");
-    playerRepository.searchByName("Alice").forEach(System.out::println);
+  private static void clearFile(String filename) {
+    try (FileWriter writer = new FileWriter(filename)) {
+      writer.write("[]");
+    } catch (IOException e) {
+      System.err.println("Не вдалося очистити файл " + filename + ": " + e.getMessage());
+    }
   }
 }

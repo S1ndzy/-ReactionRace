@@ -31,4 +31,13 @@ public class GameResult {
   public boolean isSuccess() {
     return success;
   }
+
+  @Override
+  public String toString() {
+    return "GameResult{" +
+        "playerId='" + playerId + '\'' +
+        ", reactionTime=" + reactionTime +
+        ", success=" + success +
+        '}';
+  }
 }
