@@ -18,28 +18,9 @@ public class Main {
     GameResultService gameResultService = new GameResultService(gameResultRepository);
     AuthService authService = new AuthService(playerService);
 
-    // Реєстрація гравців
-    authService.register("1", "Alice", "alice@example.com", "password123");
-    authService.register("2", "Bob", "bob@example.com", "password456");
-
-    // Вхід у систему
-    authService.login("alice@example.com", "password123")
-        .ifPresentOrElse(
-            player -> System.out.println("Вхід успішний для гравця: " + player.getName()),
-            () -> System.out.println("Помилка входу.")
-        );
-
-    // Додавання результатів гри
-    gameResultService.saveGameResult(new GameResult("1", 1.23, true));
-    gameResultService.saveGameResult(new GameResult("2", 1.56, false));
-
-    // Виведення всіх результатів гри
-    System.out.println("Усі результати гри:");
-    gameResultService.getAllResults().forEach(System.out::println);
-
-    // Фільтрація результатів гри
-    System.out.println("Результати гри з часом <= 1.5 секунди:");
-    gameResultService.filterResultsByReactionTime(1.5).forEach(System.out::println);
+    // Запуск консольного інтерфейсу
+    ConsoleUI consoleUI = new ConsoleUI(authService);
+    consoleUI.start();
   }
 
   private static void clearFile(String filename) {
